@@ -88,8 +88,17 @@ app.use('/api/reports', reportRoutes);
 // Serve frontend static files (if exists)
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Catch-all route for SPA
-app.get('*', (req: Request, res: Response) => {
+// Rate limiter for static files
+const staticLimiter = rateLimit({
+    windowMs: 60000, // 1 minute
+    max: 100, // 100 requests per minute for static files
+    message: 'Too many requests, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+// Catch-all route for SPA (with rate limiting to prevent abuse)
+app.get('*', staticLimiter, (req: Request, res: Response) => {
     const publicPath = path.join(__dirname, '../public/index.html');
     res.sendFile(publicPath, (err) => {
         if (err) {
