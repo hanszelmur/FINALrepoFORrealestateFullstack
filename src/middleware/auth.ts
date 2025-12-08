@@ -16,7 +16,11 @@ export const authenticateToken = (
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret') as {
+        if (!process.env.JWT_SECRET) {
+            res.status(500).json({ error: 'Server configuration error' });
+            return;
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET) as {
             id: number;
             email: string;
             role: 'admin' | 'agent';

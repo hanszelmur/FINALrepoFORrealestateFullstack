@@ -3,8 +3,19 @@ export const sanitizeInput = (input: string): string => {
     
     return input
         .trim()
-        .replace(/[<>]/g, '') // Remove potential HTML tags
-        .replace(/[\x00-\x1F\x7F]/g, ''); // Remove control characters
+        // Remove HTML tags and potentially dangerous characters
+        .replace(/[<>]/g, '')
+        // Remove control characters
+        .replace(/[\x00-\x1F\x7F]/g, '')
+        // Escape common XSS vectors
+        .replace(/[&"']/g, (char) => {
+            const escapeMap: Record<string, string> = {
+                '&': '&amp;',
+                '"': '&quot;',
+                "'": '&#x27;'
+            };
+            return escapeMap[char] || char;
+        });
 };
 
 export const sanitizeObject = (obj: any): any => {

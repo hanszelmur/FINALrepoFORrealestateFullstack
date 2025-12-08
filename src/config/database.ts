@@ -3,6 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Validate required environment variables
+if (!process.env.DB_PASSWORD) {
+    console.warn('Warning: DB_PASSWORD is not set. This is insecure for production.');
+}
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '3306'),

@@ -8,6 +8,27 @@ import path from 'path';
 // Load environment variables
 dotenv.config();
 
+// Validate critical environment variables
+const requiredEnvVars = ['JWT_SECRET', 'DB_HOST', 'DB_USER', 'DB_NAME'];
+const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
+
+if (missingEnvVars.length > 0) {
+    console.error('✗ Missing required environment variables:', missingEnvVars.join(', '));
+    console.error('Please configure these in your .env file');
+    process.exit(1);
+}
+
+// Warn about insecure configurations
+if (process.env.NODE_ENV === 'production') {
+    if (!process.env.DB_PASSWORD) {
+        console.warn('⚠ Warning: DB_PASSWORD is not set. This is insecure for production!');
+    }
+    if (process.env.JWT_SECRET === 'your_super_secret_jwt_key_change_this_in_production') {
+        console.error('✗ Error: Default JWT_SECRET detected. Change this in production!');
+        process.exit(1);
+    }
+}
+
 // Import routes
 import authRoutes from './routes/authRoutes';
 import propertyRoutes from './routes/propertyRoutes';

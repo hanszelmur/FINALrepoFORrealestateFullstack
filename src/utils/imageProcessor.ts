@@ -46,9 +46,11 @@ export const processPropertyPhoto = async (
     // Create thumbnail
     await createThumbnail(file.path, thumbnailPath);
 
-    // Delete original uploaded file
-    if (fs.existsSync(file.path)) {
-        fs.unlinkSync(file.path);
+    // Delete original uploaded file using async method
+    try {
+        await fs.promises.unlink(file.path);
+    } catch (error) {
+        console.error('Error deleting original file:', error);
     }
 
     return {

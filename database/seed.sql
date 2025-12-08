@@ -1,8 +1,11 @@
 -- Seed data for Real Estate Management System
+-- WARNING: These are sample credentials for development/testing only!
+-- DO NOT use these in production. Change all passwords immediately after deployment.
 USE real_estate_db;
 
 -- Insert admin user (password: Admin123!@#)
 -- bcrypt hash for 'Admin123!@#' with 10 rounds
+-- SECURITY: Change this password immediately in production!
 INSERT INTO users (email, password_hash, full_name, role, phone, status) VALUES
 ('admin@realestate.com', '$2b$10$rKZqJQ8lN0X8VqXQP3Y8.OQJxVZXvGxNjhJZKvY6ZgXYxQYPQJxVe', 'System Administrator', 'admin', '+639171234567', 'active');
 
