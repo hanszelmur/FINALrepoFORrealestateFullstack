@@ -42,8 +42,10 @@ export async function processImage(filePath: string): Promise<ProcessedImages> {
         // Delete original file
         try {
             await fs.unlink(filePath);
-        } catch (error) {
-            console.error('Warning: Could not delete original file:', error);
+        } catch (error: any) {
+            if (error.code !== 'ENOENT') {
+                console.error('Warning: Could not delete original file:', error.message);
+            }
         }
 
         return {
