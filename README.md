@@ -10,7 +10,7 @@ A complete, production-ready real estate management system built with Node.js, T
 - **Authentication**: JWT with bcrypt password hashing
 - **File Upload**: Multer with Sharp for image processing
 - **Validation**: Joi for input validation
-- **Security**: Rate limiting, CSRF protection, SQL injection prevention
+- **Security**: Rate limiting, JWT-based CSRF protection, SQL injection prevention
 - **Frontend**: Vanilla JavaScript with modern ES6+ features
 
 ## 📋 Features
@@ -71,11 +71,24 @@ A complete, production-ready real estate management system built with Node.js, T
 
 9. **Security Features**
    - Express rate limiting (100 requests per 15 minutes)
-   - CSRF protection with csurf
+   - JWT-based CSRF protection (tokens in Authorization header)
    - SQL injection prevention (parameterized queries)
    - File upload validation
    - Input sanitization
    - Secure password policies
+
+## ⚠️ IMPORTANT: Agent Creation Security
+
+**There is NO "Add Agent" form in the admin portal UI.** This is an intentional security design.
+
+To create new agents, use ONE of these methods:
+1. **CLI Script (Recommended)**: `npm run add-agent` - Interactive prompts with validation
+2. **Direct SQL Insert**: For advanced admins with database access
+3. **Protected API**: For HR system integrations only (requires admin JWT + secret)
+
+See [AGENT_CREATION_GUIDE.md](./AGENT_CREATION_GUIDE.md) for detailed instructions.
+
+Admins can view, deactivate, reactivate, and reset passwords for existing agents through the web UI.
 
 ## 🛠️ Installation & Setup
 
@@ -172,6 +185,16 @@ npm start
 ```
 
 The server will be available at `http://localhost:3000`
+
+### Step 7: Create Agents (Optional)
+
+To add new agents to the system:
+
+```bash
+npm run add-agent
+```
+
+Follow the interactive prompts to create an agent account. See [AGENT_CREATION_GUIDE.md](./AGENT_CREATION_GUIDE.md) for alternative methods.
 
 ## 📚 API Documentation
 
@@ -616,6 +639,12 @@ The system includes comprehensive validation and error handling. To test:
 ## 📄 License
 
 MIT License - See LICENSE file for details
+
+## 📚 Additional Documentation
+
+- **[AGENT_CREATION_GUIDE.md](./AGENT_CREATION_GUIDE.md)** - How to create new agents (CLI, SQL, API)
+- **[API_DOCS.md](./API_DOCS.md)** - Complete API reference with examples
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Production deployment guide with security checklist
 
 ## 👥 Support
 

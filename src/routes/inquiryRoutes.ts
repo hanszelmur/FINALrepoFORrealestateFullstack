@@ -2,7 +2,7 @@ import { Router } from 'express';
 import * as inquiryController from '../controllers/inquiryController';
 import { authenticateToken, requireAgent } from '../middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 router.post('/', inquiryController.createInquiry);
 router.get('/', authenticateToken, inquiryController.getAllInquiries);

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import * as reportController from '../controllers/reportController';
 import { authenticateToken, requireAdmin } from '../middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 router.get('/properties', authenticateToken, requireAdmin, reportController.exportPropertiesCSV);
 router.get('/inquiries', authenticateToken, requireAdmin, reportController.exportInquiriesCSV);
