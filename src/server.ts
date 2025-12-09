@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
 import path from 'path';
+import morgan from 'morgan';
 
 // Load environment variables
 dotenv.config();
@@ -48,6 +49,9 @@ const server = http.createServer(app);
 
 // Initialize Socket.io
 initializeSocket(server);
+
+// Request logging
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Middleware
 app.use(cors({
