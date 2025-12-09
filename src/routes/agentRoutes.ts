@@ -2,7 +2,7 @@ import { Router } from 'express';
 import * as agentController from '../controllers/agentController';
 import { authenticateToken } from '../middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 router.get('/', authenticateToken, agentController.getAllAgents);
 router.get('/stats', authenticateToken, agentController.getAgentStats);

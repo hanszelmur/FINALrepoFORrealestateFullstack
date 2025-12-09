@@ -2,7 +2,7 @@ import { Router } from 'express';
 import * as calendarController from '../controllers/calendarController';
 import { authenticateToken, requireAgent } from '../middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 router.post('/', authenticateToken, requireAgent, calendarController.createCalendarEvent);
 router.get('/', authenticateToken, calendarController.getCalendarEvents);

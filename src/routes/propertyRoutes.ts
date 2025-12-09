@@ -4,7 +4,7 @@ import * as uploadController from '../controllers/uploadController';
 import { authenticateToken, requireAgent } from '../middleware/auth';
 import { upload } from '../middleware/upload';
 
-const router = Router();
+const router: Router = Router();
 
 router.get('/', propertyController.getAllProperties);
 router.get('/:id', propertyController.getPropertyById);
