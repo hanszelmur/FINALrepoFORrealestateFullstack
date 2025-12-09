@@ -141,7 +141,7 @@ All reports export to CSV format:
 - **Rate Limiting**: 
   - API endpoints: 100 requests per 15 minutes
   - Static files: 100 requests per minute
-- **CSRF Protection**: csurf middleware configured
+- **CSRF Protection**: JWT-based (Authorization header only)
 - **SQL Injection Prevention**: All parameterized queries
 - **File Upload Security**: Type and size validation
 - **Input Validation**: Joi schemas for all inputs

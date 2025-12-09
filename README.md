@@ -10,7 +10,7 @@ A complete, production-ready real estate management system built with Node.js, T
 - **Authentication**: JWT with bcrypt password hashing
 - **File Upload**: Multer with Sharp for image processing
 - **Validation**: Joi for input validation
-- **Security**: Rate limiting, CSRF protection, SQL injection prevention
+- **Security**: Rate limiting, JWT-based CSRF protection, SQL injection prevention
 - **Frontend**: Vanilla JavaScript with modern ES6+ features
 
 ## 📋 Features
@@ -71,7 +71,7 @@ A complete, production-ready real estate management system built with Node.js, T
 
 9. **Security Features**
    - Express rate limiting (100 requests per 15 minutes)
-   - CSRF protection with csurf
+   - JWT-based CSRF protection (tokens in Authorization header)
    - SQL injection prevention (parameterized queries)
    - File upload validation
    - Input sanitization
